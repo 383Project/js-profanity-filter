@@ -2,7 +2,6 @@
 
 Complete swear filter package which support most languages and more than **10000 words** .
 
-
 ## Installation
 
     npm install swearify --save
@@ -10,16 +9,14 @@ Complete swear filter package which support most languages and more than **10000
 ## Usage
 
 ```js
-const filter = require('swearify');
+const filter = require("swearify");
 
-const result = filter.findAndFilter (
-'Lorem ipsum dolor fUck amet, consectetur xxx elit, sed do жопа tempor incididunt fuck ut sex et 
-dolore magna aliqua, lorem دیوس dolor sit amet, consectetur بیناموس elit, sed do eiusmod tempor incididunt
-ut b*tch et dolore ковровщик aliqua 🖕',                   // your sentence to filter
-'▩',                                                      // placeholder
-['en',  'fa',  'ru'],                                     // filter in which languages
-['sex'],                                                  // allowed swears
-[],                                                       // add your own words
+const result = filter.findAndFilter(
+  "Lorem ipsum dolor fUck amet, consectetur xxx elit, sed do жопа tempor incididunt fuck ut sex et dolore magna aliqua, lorem دیوس dolor sit amet, consectetur بیناموس elit, sed do eiusmod tempor incididunt ut b*tch et dolore ковровщик aliqua 🖕", // your sentence to filter
+  "▩", // placeholder
+  ["en", "fa", "ru"], // filter in which languages
+  ["sex"], // allowed swears
+  [] // add your own words
 );
 
 console.log(result);
@@ -35,7 +32,7 @@ console.log(result);
 
 **bad_words:** [ 'ковровщик', 'بیناموس', 'b*tch', 'fuck', 'دیوس', 'жопа', 'sex', 'xxx', 'xx', '🖕'],
 
-**filtered_sentense:**
+**filtered_sentence:**
 'Lorem ipsum dolor ▩▩▩▩ amet, consectetur ▩▩▩ elit, sed do ▩▩▩▩ tempor incididunt ▩▩▩▩ ut <ins>sex</ins> et dolore
 magna aliqua, lorem ▩▩▩▩ dolor sit amet, consectetur ▩▩▩▩▩▩▩ elit, sed do eiusmod tempor incididunt ut b\*▩▩▩▩▩ et dolore ▩▩▩▩▩▩▩▩▩ aliqua ▩▩',
 

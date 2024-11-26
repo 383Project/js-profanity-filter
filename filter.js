@@ -1,24 +1,32 @@
 const words = require("./data/words.json");
 
 const findAndFilter = (
-    sentense,
-    placeholder,
-    languages,
-    allowed_words,
-    myList
+    sentence,
+    placeholder = "*",
+    languages = ['en'],
+    allowed_words = [],
+    myList = []
 ) => {
+    const selected_languages = [];
     try {
         let found = [];
-        //find sweras according to slected languages
+        //find sweras according to selected languages
         for (let i = 0; i < languages.length; i++) {
+            if (words[languages[i]] === undefined) {
+                console.warn(`Language ${languages[i]} not found`);
+                continue;
+            } else {
+                selected_languages.push(languages[i]);
+            }
+
             let language = languages[i];
             found = [
                 ...found,
-                ...words[language].filter((e) => sentense.toLowerCase().includes(e)),
+                ...words[language].filter((e) => sentence.toLowerCase().includes(e)),
             ];
             found = [
                 ...found,
-                ...myList.filter((e) => sentense.toLowerCase().includes(e)),
+                ...myList.filter((e) => sentence.toLowerCase().includes(e)),
             ];
         }
         //sort founded words by length
@@ -30,7 +38,7 @@ const findAndFilter = (
                     const spoilString = new Array(found[i].length)
                         .fill(placeholder)
                         .join("");
-                    sentense = sentense.replaceAll(
+                    sentence = sentence.replaceAll(
                         new RegExp(found[i], "gi"),
                         spoilString
                     );
@@ -38,18 +46,19 @@ const findAndFilter = (
             }
             return {
                 found: true,
-                selected_languages: languages,
+                selected_languages,
                 bad_words: found,
-                filtered_sentense: sentense,
+                filtered_sentence: sentence,
                 allowed_words: allowed_words,
             };
         }
-        //if there is no swear in the sentense return false
+        //if there is no swear in the sentence return false
         return {
             found: false,
         };
     } catch (error) {
-        console.log("error in findAndFilter", error);
+        console.warn("error in findAndFilter", error);
+        throw error;
     }
 };
 
